@@ -56,6 +56,10 @@ to include examples, links to docs, or any other relevant information.
 
 ### Fixed
 
+- Encoding a datetime search attribute without a timezone now raises
+  `ValueError("Timezone must be present on all search attribute dates")` on
+  the typed path, matching the deprecated untyped encoder, instead of sending
+  a naive ISO string that the server rejects with `BadSearchAttributes`.
 - `temporalio.contrib.deepagents` no longer dedups repeated identical tool,
   model, and backend-op calls: each dispatch runs its own Activity, and the
   continue-as-new result cache is retired for new executions (a continued run
